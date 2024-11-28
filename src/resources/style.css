@@ -1,0 +1,18 @@
+ .root {
+    min-height: 700px;
+    min-width: 700px;
+    font-size: 12px;
+} 
+.hbox-top {
+    padding: 10px 10px 10px 10px;
+    -fx-spacing: 35px;
+}
+.hbox-top .button {
+    padding: 15px 15px 15px 15px;
+    background-color: #33993a;
+    -fx-text-fill: #ffffff;
+    border-radius: 15px;
+    min-width: 50px;
+    -fx-pref-width: 100px;
+    font-size: 20px;
+}

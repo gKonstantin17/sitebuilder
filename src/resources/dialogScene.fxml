@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane xmlns:fx="http://javafx.com/fxml"
+fx:controller="UI.DialogSceneController" >
+    <headerText>Диалог с вводом</headerText>
+    <content>
+        <VBox spacing="10">
+            <TextField fx:id="textField" promptText="Введите что-нибудь"/>
+        </VBox>
+    </content>
+    <buttonTypes>
+        <ButtonType text="Ок" buttonData="OK_DONE"/>
+        <ButtonType text="Отмена" buttonData="CANCEL_CLOSE"/>
+    </buttonTypes>
+</DialogPane>
+

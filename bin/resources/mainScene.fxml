@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml/1" 
+     stylesheets="@style.css"
+     >
+	<top>
+	<HBox styleClass="hbox-top">
+		<Button text="Тык1" />
+		<Button text="Тык2" />
+		<Button text="Тык3" />
+		<Button text="Тык4" />
+		
+	</HBox>
+	</top>
+	
+	<center>
+	<StackPane alignment="CENTER">
+		<VBox styleClass="vbox-center">
+			<Label text="Йоу" />
+		</VBox>
+	</StackPane>
+	</center>
+	
+	<left>
+	<VBox styleClass="vbox-left">
+		<Label  text="Элемент списка" />
+		<Label  text="Элемент списка" />
+		<Label  text="Элемент списка" />
+		<Label  text="Элемент списка" />
+		<TextArea styleClass="copy-text" text="Меня можно выделить" editable="false"/>
+	</VBox>
+	</left>
+	
+	<right>
+	<VBox styleClass="vbox-right">
+
+			<Label text="Здесь можно что-то ввести и нажать кнопку (ничего не произойдет)" />
+			<TextArea styleClass="textArea"/>
+			<Button text="Кнопка" />
+
+	</VBox>
+	</right>
+	
+	
+
+</BorderPane>
+
