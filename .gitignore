@@ -1,5 +1,5 @@
-bin/*
 !bin/resources/style.css
+bin/*
 /.settings/
 .classpath
 .project
