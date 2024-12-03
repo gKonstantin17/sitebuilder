@@ -5,7 +5,10 @@ module Prototype {
 	requires javafx.web;
 	requires javafx.base;
 	requires java.desktop;
-	
+	requires jcef;
+	requires org.junit.jupiter.api;
+	requires javafx.swing;
+	requires jogl.all;
 	opens application to javafx.graphics, javafx.fxml;
-	opens UI to javafx.graphics, javafx.fxml,javafx.web,javafx.base;
+	opens UI to javafx.graphics, javafx.fxml,javafx.web,javafx.base,jcef,org.junit.jupiter.api;
 }

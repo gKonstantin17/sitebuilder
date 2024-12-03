@@ -15,44 +15,76 @@
      stylesheets="@style.css"
      >
 	<top>
-	<HBox styleClass="hbox-top">
-		<Button text="Тык1" />
-		<Button text="Тык2" />
-		<Button text="Тык3" />
-		<Button text="Тык4" />
-		
-	</HBox>
+	<VBox>
+		<MenuBar>
+			<Menu text="Проект">
+				<MenuItem text="Сохранить" />
+				<MenuItem text="Загрузить" />
+				<MenuItem text="Экспорт проекта" />
+			</Menu>
+			<Menu text="Помощь">
+				<MenuItem text="Документация" />
+			</Menu>
+			<Menu text="О программе"/>
+			
+		</MenuBar>
+		<HBox styleClass="hbox-top">
+			<Button text="Создать блок" styleClass="button-working"/>
+			<Button text="Тык2" />
+			<Button text="Тык3" />
+			<Button text="Тык4" />
+			
+		</HBox>
+	</VBox>
 	</top>
 	
 	<center>
 	<StackPane alignment="CENTER">
-		<VBox styleClass="vbox-center">
-			<Label text="Йоу" />
+		<VBox fx:id="browserFrame" styleClass="vbox-center">
+			<Label text="Загрузка страницы..."/>
 		</VBox>
 	</StackPane>
 	</center>
 	
 	<left>
 	<VBox styleClass="vbox-left">
-		<Label  text="Элемент списка" />
-		<Label  text="Элемент списка" />
-		<Label  text="Элемент списка" />
-		<Label  text="Элемент списка" />
-		<TextArea styleClass="copy-text" text="Меня можно выделить" editable="false"/>
+		<Label  text="Надо бы" />
+		<Label  text="Спрятать " />
+		<Label  text="эту" />
+		<Label  text="Панель" />
 	</VBox>
 	</left>
 	
 	<right>
 	<VBox styleClass="vbox-right">
-
-			<Label text="Здесь можно что-то ввести и нажать кнопку (ничего не произойдет)" />
-			<TextArea styleClass="textArea"/>
-			<Button text="Кнопка" />
+		<Label text="Свойства элемента"/>
+		<Separator/>
+		<Accordion styleClass="accardion">
+		<panes>
+			<TitledPane text="Текст" >
+				<TextArea styleClass="area-property"/>
+			</TitledPane>
+			<TitledPane text="Размер шрифта" >
+				<TextField/>
+			</TitledPane>
+			<TitledPane text="Цвет текста" >
+				<ColorPicker/>
+			</TitledPane>
+			<TitledPane text="Цвет блока" >
+				<ColorPicker/>
+			</TitledPane>
+		</panes>
+		</Accordion>
+		<Button text="Изменить" />
 
 	</VBox>
 	</right>
 	
-	
+	<bottom>
+	<HBox styleClass="hbox-bottom">
+		<Label text="Строка состояния"/>
+	</HBox>
+	</bottom>
 
 </BorderPane>
 
