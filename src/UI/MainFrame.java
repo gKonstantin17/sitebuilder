@@ -31,7 +31,7 @@ import javax.swing.JTextField;
 
 /**
  * This is a simple example application using JCEF.
- * It displays a JFrame with a JTextField at its top and a CefBrowser in its
+ * It displays a JF	rame with a JTextField at its top and a CefBrowser in its
  * center. The JTextField is used to enter and assign an URL to the browser UI.
  * No additional handlers or callbacks are used in this example.
  *

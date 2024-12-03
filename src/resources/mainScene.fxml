@@ -12,7 +12,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml/1" 
-     stylesheets="@style.css"
+     stylesheets="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/style.css"
      >
 	<top>
 	<VBox>
@@ -29,11 +29,13 @@
 			
 		</MenuBar>
 		<HBox styleClass="hbox-top">
-			<Button text="Создать блок" styleClass="button-working"/>
+			<Button text="Создать блок" styleClass="button-working" fx:id="createrDiv" onAction="#createDiv"/>
 			<Button text="Тык2" />
 			<Button text="Тык3" />
 			<Button text="Тык4" />
-			
+			<Button text="Загрузить страницу" fx:id="pageLoader" onAction="#pageLoad" />
+			<Button text="Перезагрузить страницу" fx:id="pageReloader" onAction="#pageReload" />
+			<Button text="Перезагрузить браузер" fx:id="browserReloader" onAction="#browserReload" />
 		</HBox>
 	</VBox>
 	</top>

@@ -1,35 +1,54 @@
 package UI;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import org.cef.CefApp;
+import org.cef.CefApp.CefAppState;
 import org.cef.CefClient;
 import org.cef.CefSettings;
 import org.cef.browser.CefBrowser;
 import org.cef.browser.CefMessageRouter;
+import org.cef.callback.CefCommandLine;
+import org.cef.callback.CefSchemeRegistrar;
+import org.cef.handler.CefAppHandler;
+
 import javafx.stage.Stage;
 
 
 public class CEFWebView extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	String[] _args;
-	Stage _stage;
-	JFrame frame;
-	CefBrowser browser;
-	String URL = "https://google.com";
-	final boolean OFFSCREEN = false;
-    final boolean TRANSPARENT = false;
+	static String[] _args;
+	static Stage _stage;
+	static JFrame frame;
+	static CefBrowser browser;
+	//static String URL = "https://google.com";
+	static String URL = "file:///C:/Users/kocm8/eclipse-workspace/Prototype/templates/newproject/index.html";
+	static final boolean OFFSCREEN = false;
+	static final boolean TRANSPARENT = false;
 	
 	
-    public void start(String[] args, Stage stage) {
+    public static void start(String[] args, Stage stage) {
     	_args = args;
 		_stage = stage;
         Web();
         View();
     }
+    public static void startOver()
+    {
+    	if (_args == null || _stage==null)
+    		throw new IllegalStateException("This first start!, need to call start(args,stage)");
+    	Web();
+        View();
+    }
 	
-	private void Web() {  
+	private static void Web() {  
 	    if (!CefApp.startup(_args)) {
             System.out.println("Ошибка инициализации JCEF!");
             return;
@@ -43,13 +62,13 @@ public class CEFWebView extends JFrame{
         CefApp cefApp = CefApp.getInstance(settings);
         CefClient client = cefApp.createClient();
         client.addMessageRouter(CefMessageRouter.create());
-        
+
         // Создание браузера
-        this.browser = client.createBrowser(URL, OFFSCREEN, TRANSPARENT); 
+        browser = client.createBrowser(URL, OFFSCREEN, TRANSPARENT); 
 	}
-	private void View() {
+	private static void View() {
 	
-      this.frame = new JFrame();
+      frame = new JFrame();
       frame.setUndecorated(true);
       frame.setSize(1104, 735);
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -82,16 +101,47 @@ public class CEFWebView extends JFrame{
       _stage.setOnHidden(event -> frame.setVisible(false));
       _stage.setOnCloseRequest(event -> frame.dispose());
       
+      
+      
       _stage.focusedProperty().addListener((obs, oldVal, newVal) -> {
           if (newVal) {
               // Когда JavaFX окно получает фокус, гарантируем, что JFrame остаётся на переднем плане
               frame.setAlwaysOnTop(true);
+              _stage.toFront();
+        	  
           }
           else 
           	frame.setAlwaysOnTop(false);
       });
+      
       frame.add(browser.getUIComponent(), BorderLayout.CENTER);
       frame.setVisible(true);
       
+      
 	}
+	public static void ReloadBrowser() {
+		frame.dispose();
+		startOver();
+	}
+	public static void Reload() {
+		browser.reload();
+	}
+	public static void LoadURL() {
+		browser.loadURL(URL);
+	}
+	public static String ReadJS(String filePath) {
+		String fileURL = "file:///" + filePath;
+		try {
+			return new String(Files.readAllBytes(Paths.get(filePath)));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static void ExecuteJS(String filePath)
+	{
+		String jsCode = ReadJS(filePath);
+		browser.executeJavaScript(jsCode, browser.getURL(), 0);
+	}
+	
 }

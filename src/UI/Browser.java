@@ -22,7 +22,7 @@ public class Browser {
 	private static final String URL = "https://google.com";
     private static final boolean OFFSCREEN = false;
     private static final boolean TRANSPARENT = false;
-    
+    	
     public static void main(String[] args) {
         if (!CefApp.startup(args)) {
             System.out.println("Startup initialization failed!");

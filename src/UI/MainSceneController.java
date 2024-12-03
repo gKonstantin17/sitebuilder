@@ -67,31 +67,54 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 public class MainSceneController {
-	private String[] _args;
+	
 //	private HostServices hostServices;
 //
 //    public HostServices getHostServices() {
 //        return hostServices ;
 //    }
-//
+//	
 //	public void setHostServices(HostServices hostServices) {
 //		this.hostServices = hostServices;
 //    }
-	public MainSceneController(String[] args)
-	{
-		_args = args;
-	}
 	
 	
+	
+	
+//	@FXML
+//    private VBox browserFrame;
+//	public void initialize()
+//	{
+//		browserFrame.setMinWidth(800);
+//		browserFrame.setMinHeight(600);
+//		
+//	}
 	
 	@FXML
-    private VBox browserFrame;
-	public void initialize()
+	private Button pageReloader;
+	public void pageReload()
 	{
-		browserFrame.setMinWidth(800);
-		browserFrame.setMinHeight(600);
-		
+		CEFWebView.Reload();
 	}
+	@FXML
+	private Button pageLoader;
+	public void pageLoad()
+	{
+        CEFWebView.LoadURL();
+    }
+	@FXML
+	private Button browserReloader;
+	public void browserReload()
+	{
+		CEFWebView.Reload();
+	}
+	
+	@FXML
+	private Button createrDiv;
+	public void createDiv()
+	{
+        CEFWebView.ExecuteJS(Tools.CREATE_DIV.getPath());
+    }
 }
 
 

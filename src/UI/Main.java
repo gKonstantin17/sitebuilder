@@ -63,7 +63,7 @@ public class Main extends Application{
     	stage.setWidth(1550);
         stage.setHeight(880);	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/mainScene.fxml"));
-		loader.setController(new MainSceneController(args));
+		loader.setController(new MainSceneController());
 		MainSceneController controller = loader.getController();
 		//controller.setHostServices(getHostServices());
     	try {
