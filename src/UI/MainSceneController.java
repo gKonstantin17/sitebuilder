@@ -106,7 +106,7 @@ public class MainSceneController {
 	private Button browserReloader;
 	public void browserReload()
 	{
-		CEFWebView.Reload();
+		Main.RestartBrowser();
 	}
 	
 	@FXML

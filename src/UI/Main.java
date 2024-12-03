@@ -52,6 +52,7 @@ import javafx.stage.WindowEvent;
 
 public class Main extends Application{
 	 private static String[] args; // Статическое поле для хранения аргументов
+	 private static Stage _stage;
 	    public static void main(String[] args) {
 	        Main.args = args; // Сохраняем аргументы
 	        launch(); // Запускаем JavaFX приложение
@@ -59,6 +60,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) {
+    	_stage = stage;
     	stage.setTitle("Site Builder");
     	stage.setWidth(1550);
         stage.setHeight(880);	
@@ -74,11 +76,14 @@ public class Main extends Application{
 		}	
     	stage.setMaximized(true);
         stage.show();
-        CEFWebView browser = new CEFWebView();
-        browser.start(args, stage);
+        CEFWebView.start(args, stage);
     }
+    public static void RestartBrowser()
+	{
+		CEFWebView.ReloadBrowser(args, _stage);
+	}
 }
-
+	
 
 
 

@@ -33,9 +33,9 @@
 			<Button text="Тык2" />
 			<Button text="Тык3" />
 			<Button text="Тык4" />
-			<Button text="Загрузить страницу" fx:id="pageLoader" onAction="#pageLoad" />
-			<Button text="Перезагрузить страницу" fx:id="pageReloader" onAction="#pageReload" />
-			<Button text="Перезагрузить браузер" fx:id="browserReloader" onAction="#browserReload" />
+			<Button text="Загрузить страницу" styleClass="button-working" fx:id="pageLoader" onAction="#pageLoad" />
+			<Button text="Перезагрузить страницу" styleClass="button-working" fx:id="pageReloader" onAction="#pageReload" />
+			<Button text="Перезагрузить браузер" styleClass="button-working" fx:id="browserReloader" onAction="#browserReload" />
 		</HBox>
 	</VBox>
 	</top>

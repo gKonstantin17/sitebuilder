@@ -28,6 +28,7 @@ public class CEFWebView extends JFrame{
 	static Stage _stage;
 	static JFrame frame;
 	static CefBrowser browser;
+	static CefClient client;
 	//static String URL = "https://google.com";
 	static String URL = "file:///C:/Users/kocm8/eclipse-workspace/Prototype/templates/newproject/index.html";
 	static final boolean OFFSCREEN = false;
@@ -44,7 +45,7 @@ public class CEFWebView extends JFrame{
     {
     	if (_args == null || _stage==null)
     		throw new IllegalStateException("This first start!, need to call start(args,stage)");
-    	Web();
+    	browser = client.createBrowser(URL, OFFSCREEN, TRANSPARENT);
         View();
     }
 	
@@ -60,7 +61,7 @@ public class CEFWebView extends JFrame{
 
         // Инициализация CefApp один раз
         CefApp cefApp = CefApp.getInstance(settings);
-        CefClient client = cefApp.createClient();
+        client = cefApp.createClient();
         client.addMessageRouter(CefMessageRouter.create());
 
         // Создание браузера
@@ -119,9 +120,11 @@ public class CEFWebView extends JFrame{
       
       
 	}
-	public static void ReloadBrowser() {
+	public static void ReloadBrowser(String[] args, Stage stage) {
 		frame.dispose();
 		startOver();
+
+
 	}
 	public static void Reload() {
 		browser.reload();
