@@ -120,7 +120,7 @@ public class CEFWebView extends JFrame{
       
       
 	}
-	public static void ReloadBrowser(String[] args, Stage stage) {
+	public static void RestartBrowser() {
 		frame.dispose();
 		startOver();
 

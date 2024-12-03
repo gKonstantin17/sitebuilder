@@ -78,10 +78,7 @@ public class Main extends Application{
         stage.show();
         CEFWebView.start(args, stage);
     }
-    public static void RestartBrowser()
-	{
-		CEFWebView.ReloadBrowser(args, _stage);
-	}
+
 }
 	
 
