@@ -1,5 +1,8 @@
 !bin/resources/style.css
-bin/*
+bin/resources/*
+bin/UI/*
+bin/application/*
+bin/module-info.class
 /.settings/
 .classpath
 .project
