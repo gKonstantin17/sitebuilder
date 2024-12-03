@@ -1,0 +1,85 @@
+ /* padding: up right down left*/
+
+ /* общее правила  */
+ .root {
+    -fx-font-size: 14px;
+} 
+.button {
+    -fx-background-color: #33993a;
+    -fx-text-fill: white;
+}
+/* стандартное поведение кнопок */
+.button:hover {
+    -fx-background-color: #33993a;
+}
+.button:pressed {
+    -fx-background-color: #33993a;
+}
+.hbox-top {
+    -fx-spacing: 20px;
+    -fx-background-color: rgb(193, 186, 186);
+    -fx-padding: 0px 0px 0px 15px;
+}
+
+
+
+.hbox-top .button {
+    -fx-padding: 10px 15px 10px 15px;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 15px;
+    -fx-min-width: 50px;
+    -fx-font-size: 16px;
+}
+.button-working {
+    -fx-background-color: #33993a;
+}
+.button-working:hover {
+    -fx-background-color: #1c5820;
+}
+.button-working:pressed {
+    -fx-background-color: #0096c9;
+}
+.vbox-center {
+    -fx-min-width: 1100px;
+    -fx-min-height: 700px;
+    -fx-background-color: rgb(189, 170, 170);
+    -fx-alignment: center;
+}
+.vbox-center .label {
+    -fx-font-size: 20px;
+}
+.vbox-left {
+    -fx-min-width: 225px;
+    -fx-max-width: 225px;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-background-color: rgb(216, 190, 190);
+}
+.vbox-right {
+    -fx-min-width: 225px;
+    -fx-max-width: 225px;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-spacing: 10px;
+    -fx-background-color: rgb(204, 188, 167);
+}
+.accardion {
+    -fx-max-width: 190px;
+}
+.area-property {
+    -fx-wrap-text: true;
+    -fx-max-height: 110px;
+}
+.vbox-right .button {
+    -fx-background-color: #0096c9;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 3px;
+    -fx-translate-x: 65px;
+}
+.vbox-right .button:hover {
+    -fx-background-color: #026383;
+}
+.vbox-right .label {
+    -fx-color: #464746;
+}
+.hbox-bottom {
+    -fx-min-height: 30px;
+}
