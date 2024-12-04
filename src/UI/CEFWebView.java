@@ -13,10 +13,16 @@ import org.cef.CefApp.CefAppState;
 import org.cef.CefClient;
 import org.cef.CefSettings;
 import org.cef.browser.CefBrowser;
+import org.cef.browser.CefFrame;
 import org.cef.browser.CefMessageRouter;
+import org.cef.browser.CefMessageRouter.CefMessageRouterConfig;
 import org.cef.callback.CefCommandLine;
+import org.cef.callback.CefQueryCallback;
 import org.cef.callback.CefSchemeRegistrar;
 import org.cef.handler.CefAppHandler;
+import org.cef.handler.CefMessageRouterHandler;
+import org.cef.handler.CefMessageRouterHandlerAdapter;
+import org.json.JSONObject;
 
 import javafx.stage.Stage;
 
@@ -62,10 +68,106 @@ public class CEFWebView extends JFrame{
         // Инициализация CefApp один раз
         CefApp cefApp = CefApp.getInstance(settings);
         client = cefApp.createClient();
-        client.addMessageRouter(CefMessageRouter.create());
+        
+        
+        // #
+        // ПОПЫТКА СДЕЛАТЬ РОУТЕР
+        // #
+//        CefMessageRouter.CefMessageRouterConfig config = new CefMessageRouter.CefMessageRouterConfig(
+//        	    "sendMessageToJavaFunction", // Имя функции для отправки сообщений
+//        	    "cancelMessageToJavaFunction" // Имя функции для отмены сообщений (опционально)
+//        	);
+//
+//        	CefMessageRouter router = CefMessageRouter.create(config);
+//
+//        	// Добавляем обработчик
+//        	router.addHandler(new CefMessageRouterHandlerAdapter() {
+//        	    @Override
+//        	    public boolean onQuery(
+//        	            CefBrowser browser,
+//        	            CefFrame frame,
+//        	            long queryId,
+//        	            String request,
+//        	            boolean persistent,
+//        	            CefQueryCallback callback) {
+//
+//        	        // Парсим запрос из JavaScript
+//        	        try {
+//        	            JSONObject jsonRequest = new JSONObject(request);
+//        	            String action = jsonRequest.getString("action");
+//
+//        	            // Обработка конкретного действия
+//        	            if ("getData".equals(action)) {
+//        	                // Выполнение логики
+//        	                JSONObject response = new JSONObject();
+//        	                response.put("message", "Hello from Java!");
+//        	                response.put("id", jsonRequest.getJSONObject("params").getInt("id"));
+//
+//        	                // Отправляем успешный результат обратно
+//        	                callback.success(response.toString());
+//        	                return true;
+//        	            } else {
+//        	                // Неизвестное действие
+//        	                callback.failure(400, "Unknown action");
+//        	                return false;
+//        	            }
+//        	        } catch (Exception e) {
+//        	            // Обработка ошибок парсинга или логики
+//        	            callback.failure(500, "Internal Server Error: " + e.getMessage());
+//        	            return false;
+//        	        }
+//        	    }
+//        	}, true); // passThrough = true, чтобы запросы могли быть переданы следующему обработчику, если текущий не справился.
+        // БЫЛО РАНЬШЕ
+        
+        //client.addMessageRouter(CefMessageRouter.create());
+        
+        CefMessageRouter messageRouter = CefMessageRouter.create();
+        client.addMessageRouter(messageRouter);
+        messageRouter.addHandler(new CefMessageRouterHandler() {
+            
+			@Override
+			public long getNativeRef(String arg0) {
+				// TODO Автоматически созданная заглушка метода
+				return 0;
+			}
 
+			@Override
+			public void setNativeRef(String arg0, long arg1) {
+				// TODO Автоматически созданная заглушка метода
+				
+			}
+
+			@Override
+			public boolean onQuery(CefBrowser browser, CefFrame frame, long queryId, String request, boolean persistent, CefQueryCallback callback) {
+                // Проверяем запрос от JavaScript
+                if (request.startsWith("logMessage:")) {
+                    // Извлекаем сообщение из запроса
+                    String message = request.substring("logMessage:".length());
+                    System.out.println("Перехвачено сообщение от JavaScript: " + message);
+
+                    // Отправляем успешный ответ
+                    callback.success(""); // Пустой ответ, можно добавить данные, если нужно
+                    return true;  // Сообщаем, что запрос обработан
+                }
+
+                // Если это не наш запрос, возвращаем false
+                return false;
+            }
+
+
+			@Override
+			public void onQueryCanceled(CefBrowser arg0, CefFrame arg1, long arg2) {
+				// TODO Автоматически созданная заглушка метода
+				
+			}
+
+           
+        }, false);
         // Создание браузера
         browser = client.createBrowser(URL, OFFSCREEN, TRANSPARENT); 
+        
+        
 	}
 	private static void View() {
 	
@@ -146,5 +248,7 @@ public class CEFWebView extends JFrame{
 		String jsCode = ReadJS(filePath);
 		browser.executeJavaScript(jsCode, browser.getURL(), 0);
 	}
+	
+	
 	
 }

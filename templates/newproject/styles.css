@@ -1,4 +1,16 @@
+*:hover {
+    outline: 2px solid #007BFF;
+}
+html:hover{
+    outline: 0px solid #007BFF;
+}
+body:hover{
+    outline: 0px solid #007BFF;
+}
 .container {
     width: 1140px;
     margin : 0 auto;
+}
+.container:hover {
+    outline: 0px solid #007BFF;
 }

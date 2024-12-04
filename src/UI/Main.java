@@ -50,6 +50,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+// #выделять блоки, изменять размер и двигать
+// вытаскивать элементы из web в java (чтобы можно было редактаровать)
+
+// сериализовать всё в json
+// генерация в html
+// чтение страницы из json
 public class Main extends Application{
 	 private static String[] args; // Статическое поле для хранения аргументов
 	 private static Stage _stage;

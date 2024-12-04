@@ -115,6 +115,13 @@ public class MainSceneController {
 	{
         CEFWebView.ExecuteJS(Tools.CREATE_DIV.getPath());
     }
+	
+	@FXML
+	private Button sender;
+	public void send()
+	{
+		CEFWebView.ExecuteJS(Tools.SEND.getPath());
+	}
 }
 
 

@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <p>бу</p>
-        <p class="info"></p>
-    </div>
-    <!-- <script>
-        // import { initElementSelector,} from '/scripts/elementSelector.js';
-// initElementSelector();
 function handleElementSelector(event) {
     const element = event.target;
     const tagName = element.tagName;
@@ -45,8 +29,3 @@ function handleElementSelector(event) {
 function initElementSelector() {
     document.addEventListener('click', handleElementSelector);
 }
-initElementSelector();
-    </script> -->
-    <script src="main.js"></script>
-</body>
-</html>

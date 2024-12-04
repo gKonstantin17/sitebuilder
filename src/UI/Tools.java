@@ -4,7 +4,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public enum Tools {
-	CREATE_DIV("templates/tools/createDiv.js");
+	CREATE_DIV("templates/tools/createDiv.js"),
+	SEND("templates/tools/send.js");
 	
 	String path;
 	

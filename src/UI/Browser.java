@@ -18,7 +18,7 @@ import org.cef.browser.CefMessageRouter;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.layout.VBox;
 
-public class Browser {
+public class Browser { // example running cef
 	private static final String URL = "https://google.com";
     private static final boolean OFFSCREEN = false;
     private static final boolean TRANSPARENT = false;
