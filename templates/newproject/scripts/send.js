@@ -1,4 +1,4 @@
-(function() {
+function send() {
     var originalLog = console.log;
     console.log = function(message) {
         // Отправляем сообщение в Java через CEF, но без повторного вызова console.log
@@ -14,6 +14,4 @@
         // Оставляем вывод только один раз в консоль
         originalLog.apply(console, arguments);
     };
-
-    console.log("Ku-ku");
-})();
+};

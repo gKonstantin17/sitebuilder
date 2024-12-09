@@ -32,7 +32,6 @@
 			<Button text="Создать блок" styleClass="button-working" fx:id="createrDiv" onAction="#createDiv"/>
 			<Button text="Тык2" />
 			<Button text="Тык3" />
-			<Button text="send" fx:id="sender" onAction="#send"/>
 			<Button text="Загрузить страницу" styleClass="button-working" fx:id="pageLoader" onAction="#pageLoad" />
 			<Button text="Перезагрузить страницу" styleClass="button-working" fx:id="pageReloader" onAction="#pageReload" />
 			<Button text="Перезагрузить браузер" styleClass="button-working" fx:id="browserReloader" onAction="#browserReload" />
@@ -60,24 +59,25 @@
 	<right>
 	<VBox styleClass="vbox-right">
 		<Label text="Свойства элемента"/>
+		<Label styleClass="id-selected" fx:id="idSelected"/>
 		<Separator/>
 		<Accordion styleClass="accardion">
 		<panes>
 			<TitledPane text="Текст" >
-				<TextArea styleClass="area-property"/>
+				<TextArea styleClass="area-property" fx:id="areaProperty"/>
 			</TitledPane>
 			<TitledPane text="Размер шрифта" >
-				<TextField/>
+				<TextField  styleClass="font-size-property" fx:id="fontSizeProperty"/>
 			</TitledPane>
 			<TitledPane text="Цвет текста" >
-				<ColorPicker/>
+				<ColorPicker  styleClass="color-text-property" fx:id="colorTextProperty"/>
 			</TitledPane>
 			<TitledPane text="Цвет блока" >
-				<ColorPicker/>
+				<ColorPicker  styleClass="color-background-property" fx:id="colorBackgroundProperty"/>
 			</TitledPane>
 		</panes>
 		</Accordion>
-		<Button text="Изменить" />
+		<Button text="Изменить" fx:id="changer" onAction="#change" />
 
 	</VBox>
 	</right>

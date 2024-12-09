@@ -1,7 +1,15 @@
 const startipScripts = [ // скрипты в папке scripts и название функции
     {
-    src: 'elementSelector.js',
-    functionName: 'initElementSelector'
+      src: 'elementSelector.js',
+      functionName: 'initElementSelector'
+    },
+    {
+      src: 'send.js',
+      functionName: 'send'
+    },
+    {
+      src: 'loaderFromJava.js',
+      functionName: 'loaderFromJava'
     }
 ];
 function loadScript(src, callback) {
