@@ -1,4 +1,4 @@
-const startipScripts = [ // скрипты в папке scripts и название функции
+const startupScripts = [ // скрипты в папке scripts и название функции
     {
       src: 'elementSelector.js',
       functionName: 'initElementSelector'
@@ -10,6 +10,10 @@ const startipScripts = [ // скрипты в папке scripts и назван
     {
       src: 'loaderFromJava.js',
       functionName: 'loaderFromJava'
+    },
+    {
+      src: 'changeSize.js',
+      functionName: 'changeSize'
     }
 ];
 function loadScript(src, callback) {
@@ -31,4 +35,4 @@ function loadScriptsSequentially(scripts, index = 0) {
     }
   }
   // Запускаем загрузку скриптов
-  loadScriptsSequentially(startipScripts);
+  loadScriptsSequentially(startupScripts);

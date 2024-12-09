@@ -168,7 +168,7 @@ public class CEFWebView extends JFrame {
 //                        System.out.println("Текст: " + text);
 //                        System.out.println("Стили: " + styles.toString(2)); // 2 - отступ для форматирования
 
-					String fontSize = styles.optString("font-size", "14px");
+					String fontSize = styles.optString("font-size", "16px");
 					String colorText = styles.optString("color", "#000000");
 					String backgroundColor = styles.optString("background-color", "#FFFFFF");
 

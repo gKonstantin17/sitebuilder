@@ -50,14 +50,9 @@ function handleElementSelector(event) {
         });
     }
 
-    // Вывод информации в консоль для проверки
-    console.log('Информация об элементе:', elementInfo);
 
-    const infoElement = document.querySelector('.info');
-    infoElement.innerHTML = `
-            id: ${id} <br>
-            Тег: ${tagName} <br>
-            Текст: ${textContent || '(пусто)'}`;
+
+
 }
 
 // Инициализация события клика

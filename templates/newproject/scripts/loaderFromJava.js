@@ -10,7 +10,25 @@ function loaderFromJava(id, stylesJson) {
         Object.keys(stylesJson).forEach(function(styleProperty) {
             element.style[styleProperty] = stylesJson[styleProperty];
         });
+        if (!element.querySelector('.resizer')) {
+            addResizers(element);
+        }
+        
     } else {
         console.error("Элемент с id " + id + " не найден.");
     }
+}
+
+function addResizers(element) {
+    const resizers = [
+        'top', 'bottom', 'left', 'right',
+        'top-left', 'top-right', 'bottom-left', 'bottom-right'
+    ];
+
+    resizers.forEach(resizer => {
+        let resizerDiv = document.createElement('div');
+        resizerDiv.classList.add('resizer', resizer);
+        resizerDiv.dataset.id = element.id; // Привязываем ID к каждой "ручке"
+        element.appendChild(resizerDiv);
+    });
 }

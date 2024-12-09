@@ -70,27 +70,6 @@ import javafx.util.Callback;
 
 public class MainSceneController {
 	
-//	private HostServices hostServices;
-//
-//    public HostServices getHostServices() {
-//        return hostServices ;
-//    }
-//	
-//	public void setHostServices(HostServices hostServices) {
-//		this.hostServices = hostServices;
-//    }
-	
-	
-	
-	
-//	@FXML
-//    private VBox browserFrame;
-//	public void initialize()
-//	{
-//		browserFrame.setMinWidth(800);
-//		browserFrame.setMinHeight(600);
-//		
-//	}
 	
 	@FXML
 	private Button pageReloader;
