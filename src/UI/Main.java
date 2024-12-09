@@ -50,8 +50,17 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+// #выделять блоки, 
+// #изменять размер и двигать
+// 	#вытаскивать элементы из web в java (чтобы можно было редактаровать)
+// #применять изменения ChangeElemets и loaderFromJava.js
+
+// сериализовать всё в json, удалять id у элементов, удалить ручки для изменения размера
+// генерация в html
+// чтение страницы из json
 public class Main extends Application{
 	 private static String[] args; // Статическое поле для хранения аргументов
+	 private static Stage _stage;
 	    public static void main(String[] args) {
 	        Main.args = args; // Сохраняем аргументы
 	        launch(); // Запускаем JavaFX приложение
@@ -59,11 +68,12 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) {
+    	_stage = stage;
     	stage.setTitle("Site Builder");
     	stage.setWidth(1550);
         stage.setHeight(880);	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/mainScene.fxml"));
-		loader.setController(new MainSceneController(args));
+		loader.setController(new MainSceneController());
 		MainSceneController controller = loader.getController();
 		//controller.setHostServices(getHostServices());
     	try {
@@ -74,11 +84,11 @@ public class Main extends Application{
 		}	
     	stage.setMaximized(true);
         stage.show();
-        CEFWebView browser = new CEFWebView();
-        browser.start(args, stage);
+        CEFWebView.start(args, stage);
     }
-}
 
+}
+	
 
 
 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resizable Div</title>
+  <style>
+    .resizable {
+      width: 300px;
+      height: 200px;
+      background-color: lightblue;
+      position: relative;
+      border: 2px solid #007bff;
+    }
+
+    /* "Ручки" для изменения размера */
+    .resizer {
+      position: absolute;
+      
+    }
+
+    /* Верхняя и нижняя "ручки" */
+    .resizer.top {
+      width: 100%;
+      height: 10px;
+      top: 0;
+      cursor: ns-resize;
+    }
+
+    .resizer.bottom {
+      width: 100%;
+      height: 10px;
+      bottom: 0;
+      cursor: ns-resize;
+    }
+
+    /* Левая и правая "ручки" */
+    .resizer.left {
+      width: 10px;
+      height: 100%;
+      left: 0;
+      cursor: ew-resize;
+    }
+
+    .resizer.right {
+      width: 10px;
+      height: 100%;
+      right: 0;
+      cursor: ew-resize;
+    }
+
+    /* Угловые "ручки" */
+    .resizer.top-left {
+      width: 10px;
+      height: 10px;
+      top: 0;
+      left: 0;
+      cursor: nwse-resize;
+    }
+
+    .resizer.top-right {
+      width: 10px;
+      height: 10px;
+      top: 0;
+      right: 0;
+      cursor: nesw-resize;
+    }
+
+    .resizer.bottom-left {
+      width: 10px;
+      height: 10px;
+      bottom: 0;
+      left: 0;
+      cursor: nesw-resize;
+    }
+
+    .resizer.bottom-right {
+      width: 10px;
+      height: 10px;
+      bottom: 0;
+      right: 0;
+      cursor: nwse-resize;
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <div class="container">
+    <div class="resizable">
+        <!-- Ручки на каждой стороне -->
+        <div class="resizer top"></div>
+        <div class="resizer bottom"></div>
+        <div class="resizer left"></div>
+        <div class="resizer right"></div>
+    
+        <!-- Угловые ручки -->
+        <div class="resizer top-left"></div>
+        <div class="resizer top-right"></div>
+        <div class="resizer bottom-left"></div>
+        <div class="resizer bottom-right"></div>
+      </div>
+  </div>
+
+  <script>
+
+    // Получаем все элементы
+const resizable = document.querySelector('.resizable');
+const resizers = document.querySelectorAll('.resizer');
+
+// Флаг для отслеживания процесса изменения размера
+let isResizing = false;
+let currentResizer = null;
+
+// Сохраняем начальные значения
+let startX, startY, startWidth, startHeight;
+
+// Функция для отслеживания перемещения мыши и изменения размера
+const onMouseMove = (e) => {
+  if (!isResizing) return;
+
+  const dx = e.clientX - startX;
+  const dy = e.clientY - startY;
+
+  if (currentResizer.classList.contains('right')) {
+    resizable.style.width = `${startWidth - dx}px`;
+  } else if (currentResizer.classList.contains('left')) {
+    resizable.style.width = `${startWidth - dx}px`;
+    resizable.style.left = `${parseInt(window.getComputedStyle(resizable).left, 10) + dx}px`;
+  } else if (currentResizer.classList.contains('top')) {
+    resizable.style.height = `${startHeight - dy}px`;
+    resizable.style.top = `${parseInt(window.getComputedStyle(resizable).top, 10) + dy}px`;
+  } else if (currentResizer.classList.contains('bottom')) {
+    resizable.style.height = `${startHeight + dy}px`;
+  } else if (currentResizer.classList.contains('top-left')) {
+    resizable.style.width = `${startWidth - dx}px`;
+    resizable.style.height = `${startHeight - dy}px`;
+    resizable.style.left = `${parseInt(window.getComputedStyle(resizable).left, 10) + dx}px`;
+    resizable.style.top = `${parseInt(window.getComputedStyle(resizable).top, 10) + dy}px`;
+  } else if (currentResizer.classList.contains('top-right')) {
+    resizable.style.width = `${startWidth + dx}px`;
+    resizable.style.height = `${startHeight - dy}px`;
+    resizable.style.top = `${parseInt(window.getComputedStyle(resizable).top, 10) + dy}px`;
+  } else if (currentResizer.classList.contains('bottom-left')) {
+    resizable.style.width = `${startWidth - dx}px`;
+    resizable.style.height = `${startHeight + dy}px`;
+    resizable.style.left = `${parseInt(window.getComputedStyle(resizable).left, 10) + dx}px`;
+  } else if (currentResizer.classList.contains('bottom-right')) {
+    resizable.style.width = `${startWidth + dx}px`;
+    resizable.style.height = `${startHeight + dy}px`;
+  }
+};
+
+// Функция для завершения изменения размера
+const onMouseUp = () => {
+  isResizing = false;
+  window.removeEventListener('mousemove', onMouseMove);
+  window.removeEventListener('mouseup', onMouseUp);
+};
+
+// Функция для начала изменения размера
+const onMouseDown = (e, resizer) => {
+  isResizing = true;
+  currentResizer = resizer;
+
+  startX = e.clientX;
+  startY = e.clientY;
+  startWidth = parseInt(window.getComputedStyle(resizable).width, 10);
+  startHeight = parseInt(window.getComputedStyle(resizable).height, 10);
+
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
+};
+
+// Добавляем обработчики для каждой "ручки"
+resizers.forEach(resizer => {
+  resizer.addEventListener('mousedown', (e) => onMouseDown(e, resizer));
+});
+
+  </script>
+</body>
+</html>

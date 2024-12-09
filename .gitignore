@@ -1,9 +1,6 @@
-!bin/resources/style.css
-bin/resources/*
-bin/UI/*
-bin/application/*
-bin/module-info.class
+/bin/
 /.settings/
 .classpath
 .project
 build.fxbuild
+/bin/
