@@ -1,30 +1,26 @@
 package UI;
 
 import java.awt.BorderLayout;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import org.cef.CefApp;
-import org.cef.CefApp.CefAppState;
 import org.cef.CefClient;
 import org.cef.CefSettings;
 import org.cef.browser.CefBrowser;
 import org.cef.browser.CefFrame;
 import org.cef.browser.CefMessageRouter;
-import org.cef.browser.CefMessageRouter.CefMessageRouterConfig;
-import org.cef.callback.CefCommandLine;
 import org.cef.callback.CefQueryCallback;
-import org.cef.callback.CefSchemeRegistrar;
-import org.cef.handler.CefAppHandler;
 import org.cef.handler.CefMessageRouterHandler;
-import org.cef.handler.CefMessageRouterHandlerAdapter;
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -34,7 +30,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import UI.MainSceneController;
 
 public class CEFWebView extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -174,7 +169,7 @@ public class CEFWebView extends JFrame {
 
 					Scene scene = _stage.getScene();
 					Platform.runLater(() -> {
-						// попытка передавать по fx:id, но fxml элементы null
+						// попытка передавать по fx:id, но fxml элементы is null
 //                        	MainSceneController msc = new MainSceneController();
 //							msc.idSelected.setText(id);
 //							msc.areaProperty.setText(text);
@@ -205,6 +200,32 @@ public class CEFWebView extends JFrame {
 					callback.success(""); // Пустой ответ, можно добавить данные, если нужно
 					return true; // Сообщаем, что запрос обработан
 				}
+				if (request.startsWith("serMessage:")) {
+					// Извлекаем сообщение из запроса
+					String message = request.substring("serMessage:".length());
+					// System.out.println("Перехвачено сообщение от JavaScript: " + message);
+
+					JSONArray json = new JSONArray(message);
+					System.out.println(json);
+					// Генерация имени файла с текущей датой и временем
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
+			        String fileName = "saves/output_" + formatter.format(new Date()) + ".json";
+
+			        // Запись в файл
+			        try (FileWriter file = new FileWriter(fileName)) {
+			            file.write(json.toString(4)); // С отступами для удобочитаемости
+			            System.out.println("JSON был успешно записан в файл: " + fileName);
+			        } catch (IOException e) {
+			            e.printStackTrace();
+			        }
+					
+						
+					
+					// Отправляем успешный ответ
+					callback.success(""); // Пустой ответ, можно добавить данные, если нужно
+					return true; // Сообщаем, что запрос обработан
+				}
+				
 
 				// Если это не наш запрос, возвращаем false
 				return false;
@@ -303,6 +324,12 @@ public class CEFWebView extends JFrame {
 	public static void ChangeElemets(String id, String request) {
 		String jsCode = "loaderFromJava(\"" +id + "\"," + request + ");";
 		System.out.println(jsCode);
+		browser.executeJavaScript(jsCode, browser.getURL(), 0);
+	}
+	public static void LoadElements(String json)
+	{
+		ExecuteJS(Tools.LOAD.getPath());
+		String jsCode = "loaderElements("+json+");";
 		browser.executeJavaScript(jsCode, browser.getURL(), 0);
 	}
 

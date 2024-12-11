@@ -19,13 +19,19 @@ body:hover{
 .resizer {
     position: absolute;
 }
-
+.resizer:hover{
+    outline: 2px solid #007BFF; 
+    /* TODO
+     заменить на 0
+     */
+}
 .resizer.top {
     width: 100%;
     height: 10px;
     top: 0;
     cursor: ns-resize;
     transform: translateX(-10px);
+    z-index: 1;
 }
 
 .resizer.bottom {
@@ -34,6 +40,7 @@ body:hover{
     bottom: 0;
     cursor: ns-resize;
     transform: translateX(-10px);
+    z-index: 1;
 }
 
 .resizer.left {
@@ -42,6 +49,7 @@ body:hover{
     left: 0;
     cursor: ew-resize;
     transform: translateY(-28px);
+    z-index: 1;
 }
 
 .resizer.right {
@@ -50,6 +58,7 @@ body:hover{
     right: 0;
     cursor: ew-resize;
     transform: translateY(-28px);
+    z-index: 1;
 }
 
 .resizer.top-left {
@@ -58,6 +67,7 @@ body:hover{
     top: 0;
     left: 0;
     cursor: nwse-resize;
+    z-index: 2;
 }
 
 .resizer.top-right {
@@ -66,6 +76,7 @@ body:hover{
     top: 0;
     right: 0;
     cursor: nesw-resize;
+    z-index: 2;
 }
 
 .resizer.bottom-left {
@@ -74,6 +85,7 @@ body:hover{
     bottom: 0;
     left: 0;
     cursor: nesw-resize;
+    z-index: 2;
 }
 
 .resizer.bottom-right {
@@ -82,4 +94,5 @@ body:hover{
     bottom: 0;
     right: 0;
     cursor: nwse-resize;
+    z-index: 2;
 }

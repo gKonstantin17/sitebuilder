@@ -4,7 +4,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public enum Tools {
-	CREATE_DIV("templates/tools/createDiv.js");
+	CREATE_DIV("templates/tools/createDiv.js"),
+	SAVE("templates/tools/serialization.js"),
+	LOAD("templates/tools/loaderElements.js");
 	
 	
 	String path;

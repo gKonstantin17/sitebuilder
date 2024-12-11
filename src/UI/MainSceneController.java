@@ -2,8 +2,11 @@ package UI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 import javax.print.DocFlavor.URL;
@@ -46,6 +49,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -63,6 +67,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -135,6 +140,70 @@ public class MainSceneController {
 	    int blue = (int)(color.getBlue() * 255);
 	    return String.format("rgb(%d, %d, %d)", red, green, blue);
 	}
+	
+	@FXML
+	private MenuItem menuSave;
+	public void save()
+	{
+		 CEFWebView.ExecuteJS(Tools.SAVE.getPath());
+	}
+	@FXML
+	private MenuItem menuLoad;
+	public void load() {
+	    // Создаем FileChooser
+	    FileChooser fileChooser = new FileChooser();
+
+	    // Устанавливаем заголовок окна
+	    fileChooser.setTitle("Выберите файл");
+
+	    // Устанавливаем начальную директорию (например, папка "saves")
+	    fileChooser.setInitialDirectory(new java.io.File("saves"));
+
+	    // Устанавливаем фильтры для файлов (например, только JSON файлы)
+	    fileChooser.getExtensionFilters().add(
+	        new FileChooser.ExtensionFilter("JSON Files", "*.json")
+	    );
+
+	    // Открываем диалог выбора файла
+	    java.io.File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+	    // Если файл выбран, обрабатываем его
+	    if (selectedFile != null) {
+	        String filePath = selectedFile.getAbsolutePath();
+	        // ДЛЯ
+	        // ЭКПОРТА
+	        ExportSite.setJsonFilePath(filePath);
+	        //
+	        //
+	        System.out.println(filePath);
+	        StringBuilder stringBuilder = new StringBuilder();
+
+	        // Открытие файла для чтения
+	        try (BufferedReader reader = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
+	            String line;
+	            while ((line = reader.readLine()) != null) {
+	                stringBuilder.append(line).append("\n");  // Добавляем строку и новую строку
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        // Возвращаем всю строку
+	        String json = stringBuilder.toString();
+	        System.out.println(json);
+
+	        // Вызов метода для работы с данными
+	        CEFWebView.LoadElements(json);
+	    } else {
+	        System.out.println("Файл не выбран.");
+	    }
+	}
+	@FXML
+	private MenuItem menuExport;
+	public void export() {
+		ExportSite.generate();
+	}
+
 	
 }
 

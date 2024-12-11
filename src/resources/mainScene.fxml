@@ -18,9 +18,9 @@
 	<VBox>
 		<MenuBar>
 			<Menu text="Проект">
-				<MenuItem text="Сохранить" />
-				<MenuItem text="Загрузить" />
-				<MenuItem text="Экспорт проекта" />
+				<MenuItem text="Сохранить" fx:id="menuSave" onAction="#save"/>
+				<MenuItem text="Загрузить" fx:id="menuLoad" onAction="#load" />
+				<MenuItem text="Экспорт проекта" fx:id="menuExport" onAction="#export" />
 			</Menu>
 			<Menu text="Помощь">
 				<MenuItem text="Документация" />
