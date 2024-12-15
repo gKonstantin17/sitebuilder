@@ -3,10 +3,10 @@ const startupScripts = [ // скрипты в папке scripts и назван
       src: 'elementSelector.js',
       functionName: 'initElementSelector'
     },
-    {
-      src: 'send.js',
-      functionName: 'send'
-    },
+    // {
+    //   src: 'send.js',
+    //   functionName: 'send'
+    // },
     {
       src: 'loaderFromJava.js',
       functionName: 'loaderFromJava'

@@ -12,14 +12,18 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml/1" 
-     stylesheets="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/style.css"
+     stylesheets="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/style/style.css"
      >
 	<top>
+	
 	<VBox>
+		 <fx:include fx:id="header" source="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/header.fxml" />
+
 		<MenuBar>
 			<Menu text="Проект">
-				<MenuItem text="Сохранить" fx:id="menuSave" onAction="#save"/>
-				<MenuItem text="Загрузить" fx:id="menuLoad" onAction="#load" />
+				<MenuItem text="Создать новый" fx:id="createproject" onAction="#create"/>
+				<MenuItem text="Сохранить" onAction="#save"/>
+				<MenuItem text="Загрузить" onAction="#load" />
 				<MenuItem text="Экспорт проекта" fx:id="menuExport" onAction="#export" />
 			</Menu>
 			<Menu text="Помощь">
@@ -27,65 +31,44 @@
 			</Menu>
 			<Menu text="О программе"/>
 			
-		</MenuBar>
-		<HBox styleClass="hbox-top">
-			<Button text="Создать блок" styleClass="button-working" fx:id="createrDiv" onAction="#createDiv"/>
-			<Button text="Тык2" />
-			<Button text="Тык3" />
-			<Button text="Загрузить страницу" styleClass="button-working" fx:id="pageLoader" onAction="#pageLoad" />
-			<Button text="Перезагрузить страницу" styleClass="button-working" fx:id="pageReloader" onAction="#pageReload" />
-			<Button text="Перезагрузить браузер" styleClass="button-working" fx:id="browserReloader" onAction="#browserReload" />
-		</HBox>
+		</MenuBar>		
+		
+		<fx:include fx:id="toolbar" source="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/toolbar.fxml" />
+		
 	</VBox>
 	</top>
 	
 	<center>
-	<StackPane alignment="CENTER">
-		<VBox fx:id="browserFrame" styleClass="vbox-center">
-			<Label text="Загрузка страницы..."/>
-		</VBox>
+	<StackPane alignment="CENTER" styleClass="centerContainer" style="-fx-background-color: transparent;">
+
 	</StackPane>
 	</center>
 	
 	<left>
-	<VBox styleClass="vbox-left">
-		<Label  text="Надо бы" />
-		<Label  text="Спрятать " />
-		<Label  text="эту" />
-		<Label  text="Панель" />
-	</VBox>
+	<fx:include fx:id="left" source="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/left.fxml" />
+	<!--  -->
 	</left>
 	
 	<right>
-	<VBox styleClass="vbox-right">
-		<Label text="Свойства элемента"/>
-		<Label styleClass="id-selected" fx:id="idSelected"/>
-		<Separator/>
-		<Accordion styleClass="accardion">
-		<panes>
-			<TitledPane text="Текст" >
-				<TextArea styleClass="area-property" fx:id="areaProperty"/>
-			</TitledPane>
-			<TitledPane text="Размер шрифта" >
-				<TextField  styleClass="font-size-property" fx:id="fontSizeProperty"/>
-			</TitledPane>
-			<TitledPane text="Цвет текста" >
-				<ColorPicker  styleClass="color-text-property" fx:id="colorTextProperty"/>
-			</TitledPane>
-			<TitledPane text="Цвет блока" >
-				<ColorPicker  styleClass="color-background-property" fx:id="colorBackgroundProperty"/>
-			</TitledPane>
-		</panes>
-		</Accordion>
-		<Button text="Изменить" fx:id="changer" onAction="#change" />
-
-	</VBox>
+	<fx:include fx:id="right" source="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/right.fxml" />
+	
 	</right>
 	
 	<bottom>
+	
+	
 	<HBox styleClass="hbox-bottom">
-		<Label text="Строка состояния"/>
+		<HBox styleClass="element-bottom">
+			<Label text="Проект: " styleClass="condition"/>
+			<Label text="" fx:id="projectName" styleClass="condition"/>
+		</HBox>
+		<Label text="|" styleClass="condition"/>
+		<HBox styleClass="element-bottom">
+			<Label text="Состояние: " styleClass="condition"/>
+			<Label text="" fx:id="projectSaveLabel" styleClass="condition"/>
+		</HBox>
 	</HBox>
+	 
 	</bottom>
 
 </BorderPane>

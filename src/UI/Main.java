@@ -3,6 +3,8 @@ package UI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,147 +52,76 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
-// #выделять блоки, 
-// #изменять размер и двигать
-// 	#вытаскивать элементы из web в java (чтобы можно было редактаровать)
-// #применять изменения ChangeElemets и loaderFromJava.js
+// #ExportSite разбить на функции
+// #сделать javafx поверх webview => 1 п. из редизайна
+// #webview разбить на функции (мб сделать подклассы для настройки, действий и получения запросов
+// #удалить Browser.java, LoadHandler, MainFrame, MyConsoleMessageHandler, Person, Sss
+// #Оставить Tools? 
+// #в Main убрать args? => убрать из webview
+// #в Main вынести настройки stage?
+// #перезагружать браузер при запуске с помощью 9 п. из редизайна
+// #папку resources привести в порядок
+// #вынести большие блоки кода из контроллера => контроллер разделить на классы 
+// убрать ошибки
 
-// исправить скрипт для загрузки, нужно загружать в container
+// редизайн javafx:
+//   #1.	<center> <StackPane alignment="CENTER"> сделать прозрачным, клики не будут на него попадать?
+//   #1.1	стили для строки состояния
+// 	 #2.	вместо кнопок иконки, панели одного цвета, мб разделить границы
+//   #2.1	переименовать кнопки? добавить в меню
+// 	 #3. прятать боковые панели
+// 	 #4.	в свойство элемента (справа) указать тег, а не id
+//	 #5.	аккардион - хуйня
+//   #6. по клику на элемент рамка остается, #появляется правая панель
+//   #7. вместо блока c кнопками оформить toolbar 
+//   #8. строка состояние отлеживает проект(DAL)?
+//   #9. добавить выбор нового или существующего проекта при запуске
+//   #9.1	проект при создании называть
+//  #10.	что пихать в строку состояния? счетчики элементов? текущий проект, сохранен ли
+//  #11. чтобы запускать во весь экран обязательно ли указывать размер экрана? нет, но чтобы отображался JFrame - да
+//  #12. выделять контейнер или хуй забить?
+//  #13. написать название окна
 
-// сериализовать всё в json, удалять id у элементов, удалить ручки для изменения размера
-// генерация в html
-// чтение страницы из json
+// в общем, если где-то написан комментарий, то запихнуть в метод и в названии описать комментарий
+// убрать лишние выводы в консоль
+// разделить на 3 слоя: UI, Browser, DAL
+// DAL должен следить за текущим проектом
+// ну и по идее контроллер связывает все 3 слоя
+
+// 
+
+   
 public class Main extends Application{
-	 private static String[] args; // Статическое поле для хранения аргументов
-	 private static Stage _stage;
-	    public static void main(String[] args) {
-	        Main.args = args; // Сохраняем аргументы
-	        launch(); // Запускаем JavaFX приложение
-	    }
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) {
-    	_stage = stage;
-    	stage.setTitle("Site Builder");
-    	stage.setWidth(1550);
-        stage.setHeight(880);	
+    	StageSingleton.setStage(stage);
+    	stage.setWidth(1550); // размер экрана по умолчанию
+        stage.setHeight(880);
+        stage.initStyle(StageStyle.TRANSPARENT); // Полностью прозрачное окно
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/mainScene.fxml"));
-		loader.setController(new MainSceneController());
-		MainSceneController controller = loader.getController();
-		//controller.setHostServices(getHostServices());
+    	MainSceneController controller = new MainSceneController();
+    	loader.setController(controller);
     	try {
 			Parent root = loader.load();
-			stage.setScene(new Scene(root));
+	        Scene scene = new Scene(root, Color.TRANSPARENT);
+	        stage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
     	stage.setMaximized(true);
+    	
+    	//stage.setOnShown(event -> controller.postInitialize());
         stage.show();
-        CEFWebView.start(args, stage);
+        CEFWebView.start(stage);
+        
+        
     }
-
 }
 	
-
-
-
-
-
-//public class Main extends Application {
-//	static String[] args;
-//    @Override
-//    public void start(Stage stage) {
-//        // Главное окно JavaFX
-//        stage.setTitle("JavaFX Stage");
-//        stage.setWidth(1550);
-//        stage.setHeight(880);
-//        stage.show();
-//
-//        // Swing окно
-//        JFrame frame = new JFrame();
-//        frame.setUndecorated(true);
-//        
-//        frame.setSize(1100, 700);
-//        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        frame.setLocation(175, 750);
-//     // Делаем окно невидимым в Alt+Tab
-//     
-//        frame.setType(JFrame.Type.UTILITY); // Это позволяет скрыть окно из списка приложений
-//
-//     
-//        // Привязка JFrame к Stage
-//        stage.xProperty().addListener((obs, oldVal, newVal) -> {
-//            frame.setLocation(newVal.intValue()+175, frame.getY());
-//        });
-//        stage.yProperty().addListener((obs, oldVal, newVal) -> {
-//            frame.setLocation(frame.getX(), newVal.intValue()-750 + (int) stage.getHeight());
-//        });
-//        stage.setMaximized(true);
-//        
-//     // Сворачивание JFrame вместе с окном JavaFX
-//        stage.iconifiedProperty().addListener((obs, wasIconified, isNowIconified) -> {
-//            if (isNowIconified) {
-//                frame.setState(JFrame.ICONIFIED); // Сворачиваем JFrame
-//            } else {
-//                frame.setState(JFrame.NORMAL); // Разворачиваем JFrame
-//            }
-//        });
-//        // Закрытие JFrame при закрытии Stage
-//     // Обеспечиваем, чтобы JFrame всегда был поверх JavaFX окна
-//        
-//        stage.setOnShown(event -> frame.setVisible(true));
-//        stage.setOnHidden(event -> frame.setVisible(false));
-//        stage.setOnCloseRequest(event -> frame.dispose());
-//        
-//        stage.focusedProperty().addListener((obs, oldVal, newVal) -> {
-//            if (newVal) {
-//                // Когда JavaFX окно получает фокус, гарантируем, что JFrame остаётся на переднем плане
-//                frame.setAlwaysOnTop(true);
-//            }
-//            else 
-//            	frame.setAlwaysOnTop(false);
-//        });
-//        
-//       
-//        
-//        
-//        final String URL = "https://google.com";
-//	    final boolean OFFSCREEN = false;
-//	    final boolean TRANSPARENT = false;
-//	    if (!CefApp.startup(args)) {
-//            System.out.println("Ошибка инициализации JCEF!");
-//            return;
-//        }
-//
-//        // Настройки для JCEF
-//        CefSettings settings = new CefSettings();
-//        settings.windowless_rendering_enabled = OFFSCREEN;
-//
-//        // Инициализация CefApp один раз
-//        CefApp cefApp = CefApp.getInstance(settings);
-//        CefClient client = cefApp.createClient();
-//        client.addMessageRouter(CefMessageRouter.create());
-//        
-//        // Создание браузера
-//        CefBrowser browser = client.createBrowser(URL, OFFSCREEN, TRANSPARENT);
-//
-//        frame.add(browser.getUIComponent(), BorderLayout.CENTER);
-// 
-//        frame.setVisible(true);
-//
-//        
-//        
-//    }
-//
-//    public static void main(String[] args) {
-//    	Main.args = args;
-//        launch(args);
-//    }
-//}
-//
-//
-//
-
 
 
 

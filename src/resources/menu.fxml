@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.*?>
+
+<MenuBar
+xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml/1" 
+     stylesheets="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/style/style.css"
+     fx:controller="UI.MenuController"
+ styleClass="hbox-head"
+>
+			<Menu text="Проект">
+				<MenuItem text="Создать новый" fx:id="createproject" onAction="#showCreateProjectDialog"/>
+				<MenuItem text="Сохранить" onAction="#save"/>
+				<MenuItem text="Загрузить" onAction="#load" />
+				<MenuItem text="Экспорт проекта" fx:id="menuExport" onAction="#export" />
+			</Menu>
+			<Menu text="Помощь">
+				<MenuItem text="Документация" />
+			</Menu>
+			<Menu text="О программе"/>
+			
+</MenuBar>

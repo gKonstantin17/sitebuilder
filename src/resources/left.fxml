@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.*?>
+
+<VBox 
+xmlns:fx="http://javafx.com/fxml/1" 
+     stylesheets="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/style/style.css"
+     fx:controller="UI.Controllers.LeftPanelController"
+styleClass="vbox-left">
+		<VBox styleClass="visible-left" onMouseClicked="#visibleLeft" fx:id="vboxVisibleLeft">
+			<ImageView styleClass="visible-left-img" fx:id="visibleLeftImg" preserveRatio="true" pickOnBounds="true" />
+		</VBox>
+		<VBox styleClass="vbox-left-content" fx:id="leftContent" VBox.vgrow="ALWAYS">
+			<Label  text="Надо бы" />
+			<Label  text="Спрятать " />
+			<Label  text="эту" />
+			<Label  text="Панель" />
+		</VBox>
+		
+	</VBox>
+

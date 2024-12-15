@@ -8,9 +8,9 @@ module Prototype {
 	requires jcef;
 	requires org.junit.jupiter.api;
 	requires javafx.swing;
-	requires jogl.all;
 	requires org.json;
 
-	opens application to javafx.graphics, javafx.fxml;
+	exports UI.Controllers; // Экспортируем пакет с контроллерами
+    opens UI.Controllers to javafx.fxml; // Открываем пакет для рефлексии FXMLLoader
 	opens UI to javafx.graphics, javafx.fxml,javafx.web,javafx.base,jcef,org.junit.jupiter.api,org.json;
 }

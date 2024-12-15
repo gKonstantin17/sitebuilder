@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.*?>
+
+<VBox 
+xmlns:fx="http://javafx.com/fxml/1" 
+     stylesheets="file:///C:/Users/kocm8/eclipse-workspace/Prototype/src/resources/style/style.css"
+     fx:controller="UI.Controllers.RightPanelController"
+styleClass="vbox-right" alignment="CENTER_RIGHT">
+		<VBox styleClass="visible-right" onMouseClicked="#visibleRight" fx:id="vboxVisibleRight">
+			<ImageView styleClass="visible-right-img" fx:id="visibleRightImg" preserveRatio="true" pickOnBounds="true" />
+		</VBox>
+		<VBox styleClass="vbox-right-content" fx:id="rightContent" VBox.vgrow="ALWAYS">
+			<Label text="Свойства элемента"/>
+			<Label styleClass="tag-selected" fx:id="tagSelected"/>
+			<Label styleClass="id-selected" fx:id="idSelected"/> 
+				
+			
+				<TitledPane text="Текст" expanded="false">
+					<TextArea styleClass="area-property" fx:id="areaProperty"/>
+				</TitledPane>
+				<Label text="Размер шрифта" />
+					<TextField  styleClass="font-size-property" fx:id="fontSizeProperty"/>
+				
+				<Label text="Цвет текста" />
+					<ColorPicker  styleClass="color-text-property" fx:id="colorTextProperty"/>
+				
+				<Label text="Цвет блока" />
+					<ColorPicker  styleClass="color-background-property" fx:id="colorBackgroundProperty"/>
+				
+			
+		<Button text="Изменить" fx:id="changer" onAction="#change" />	
+		</VBox>
+	</VBox>
+

@@ -4,9 +4,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public enum Tools {
-	CREATE_DIV("templates/tools/createDiv.js"),
-	SAVE("templates/tools/serialization.js"),
-	LOAD("templates/tools/loaderElements.js");
+	CREATE_DIV("createDiv.js"),
+	SAVE("serialization.js"),
+	LOAD("loaderElements.js");
 	
 	
 	String path;
@@ -16,11 +16,12 @@ public enum Tools {
 	}
 
 	public String getPath() {
-		Path absolutePath = Paths.get(path).toAbsolutePath();
+		String filePath = "templates/tools/" + path;
+		Path absolutePath = Paths.get(filePath).toAbsolutePath();
         return absolutePath.toString();
 	}
 
 	public void setPath(String path) {
-		this.path = path;
+		this.path = path; // файл в папке tools
 	}
 }

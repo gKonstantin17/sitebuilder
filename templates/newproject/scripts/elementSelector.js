@@ -1,3 +1,5 @@
+let previouslySelectedElement = null; // Хранит ранее выбранный элемент
+
 function handleElementSelector(event) {
     const element = event.target;
     const id = element.id;
@@ -28,6 +30,11 @@ function handleElementSelector(event) {
             }
         });
     }
+    if (previouslySelectedElement) {
+        previouslySelectedElement.style.outline = ''; // Сбрасываем стиль рамки
+    }
+    element.style.outline = '2px solid #007BFF';
+    previouslySelectedElement = element;
 
     // Создаем объект с информацией об элементе
     const elementInfo = {
@@ -49,10 +56,6 @@ function handleElementSelector(event) {
             }
         });
     }
-
-
-
-
 }
 
 // Инициализация события клика

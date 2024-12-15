@@ -1,18 +1,29 @@
 *:hover {
-    outline: 2px solid #007BFF;
+    outline: 1px solid #007BFF;
 }
-html:hover{
-    outline: 0px solid #007BFF;
+html:hover, body:hover, .container:hover {
+    outline: none; /* Убираем рамку у body и контейнера при наведении */
 }
-body:hover{
-    outline: 0px solid #007BFF;
+html, body {
+    min-height: 100%;
+    margin: 0;
+    box-sizing: border-box; /* Чтобы паддинги и бордеры учитывались в ширине */
 }
+
+body {
+    margin: 0;
+}
+
 .container {
-    width: 1140px;
-    margin : 0 auto;
+    max-width: 1100px; /* Ограничиваем ширину контейнера */
+    margin: 0 auto;
+    min-height: 100vh;
+    overflow: auto; /* Добавление прокрутки, если блоки выходят за пределы контейнера */
+    padding: 10px; /* Отступы внутри контейнера */
+    box-sizing: border-box; /* Учитываем паддинги и бордеры в ширине */
 }
-.container:hover {
-    outline: 0px solid #007BFF;
+.boo {
+    margin: 0;
 }
 
 
